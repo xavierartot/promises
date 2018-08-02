@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Waiting on multiple promises</title>
+  </head>
+  <body>
+
+
+  </body>
+  <script charset="utf-8">
+    async function go() {
+      const p1 = fetch('https://api.github.com/users/xavierartot').then( (r) => r.json()  )
+      const p2 = fetch('https://api.github.com/users/wesbos').then( (r) => r.json() )
+
+      //wait for both of them to come back
+      //Let's create a mega promese
+      const res = await Promise.all([p1, p2])
+      console.log(res)
+    }
+    go()
+  </script>
+</html>

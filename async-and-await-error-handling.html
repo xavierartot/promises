@@ -10,35 +10,39 @@
   </body>
   <script charset="utf-8">
 
-    //await is built on a top of promises
-      function breathe(amount) {
-        return new Promise( (resolve, reject) => {
-          if (amount > 400) {
-            reject(`That is too big a value`) //reject
-          }
-          setTimeout( () => resolve(`done for ${amount}`), amount)
-        })
-      }
+    //let's recreate setInterval()
+    function breathe(amount) {
+      return new Promise( (resolve, reject) => {
+        if (amount > 400) {
+          reject(`That is too big a value`) //reject
+        }
+        setTimeout( () => resolve(`done for ${amount}`), amount)
+      })
+    }
 
+    //await is built on a top of promises exemple with breathe()
     function catchError (cb) {
-      return cb().catch( err => console.error('Holalal:', err) )
+      return (...args) => { //allow to have an argument in go name, 20j: catchError(go('torta'))
+        return cb(...args).catch( err => console.error('Holalal:', err) )
+      }
     }
-    async function go() {
-        console.log('start')
-        const res = await breathe(100)
-        console.log(res)
-        const res1 = await breathe(200)
-        console.log(res1)
-        const res2 = await breathe(400)
-        console.log(res2)
-        const res3 = await breathe(600)
-        console.log(res3)
-        const res4 = await breathe(800)
-        console.log(res4)
-        const res5 = await breathe(1000)
-        console.log(res5)
-        console.log('end')
+    async function go(name, lastName) {
+      console.log('start', name, lastName)
+      const res = await breathe(100)
+      console.log(res)
+      const res1 = await breathe(200)
+      console.log(res1)
+      const res2 = await breathe(400)
+      console.log(res2)
+      const res3 = await breathe(600)
+      console.log(res3)
+      const res4 = await breathe(800)
+      console.log(res4)
+      const res5 = await breathe(1000)
+      console.log(res5)
+      console.log('end')
     }
-    catchError(go)
+    catchError(go('torta', 'artot', 'trato'))
   </script>
 </html>
+//rotative rax - xavier artot
