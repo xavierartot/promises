@@ -20,10 +20,12 @@
     //}
     async function go() {
       const p1 = fetch('https://api.github.com/users/xavierartot')
-      const p2 = fetch('https://api.github.com/users/wesbos')
+      const p2 = fetch('https://api.github.com/users/gaearon')
       const res = await Promise.all([p1, p2])
       dataPromises = res.map( (r)=> r.json() )
-      console.log(res)
+      //destructuring and rename the resul
+      const [xav, gaearon] = await Promise.all(res)
+      console.log(xav, gaearon)
     }
     go()
   </script>
