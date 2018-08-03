@@ -10,13 +10,19 @@
 
   </body>
   <script charset="utf-8">
+    //async function go() {
+      //const p1 = fetch('https://api.github.com/users/xavierartot').then( (r) => r.json()  )
+      //const p2 = fetch('https://api.github.com/users/wesbos').then( (r) => r.json() )
+      ////wait for both of them to come back
+      ////Let's create a mega promise
+      //const res = await Promise.all([p1, p2])
+      //console.log(res)
+    //}
     async function go() {
-      const p1 = fetch('https://api.github.com/users/xavierartot').then( (r) => r.json()  )
-      const p2 = fetch('https://api.github.com/users/wesbos').then( (r) => r.json() )
-
-      //wait for both of them to come back
-      //Let's create a mega promese
+      const p1 = fetch('https://api.github.com/users/xavierartot')
+      const p2 = fetch('https://api.github.com/users/wesbos')
       const res = await Promise.all([p1, p2])
+      dataPromises = res.map( (r)=> r.json() )
       console.log(res)
     }
     go()
